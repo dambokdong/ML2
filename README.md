@@ -27,11 +27,9 @@ Model consists of:
 
 ## Performance Evaluation
 - Description of Each : Confusion Matrix + Imbalanced Metrics  
-- Important Metrics we see : [ ] 
+- Important Metrics : 
 - Which oversampling performed the best? 
 
 All models exhibited sufficient capacity to learn the training distribution with high accuracy. The error rates for all models were highest for the classes with the fewest examples. Collecting more data for the S- and F-type arrhythmias would likely increase the overall accuracy of the trained models.
-
-In contrast with Kachuee, Fazeli, & Sarrafzadeh (2018), I chose to upsample the under-represented classes rather than augment data as we do not have a physiologically valid generative model for heartbeats. Kachuee et al. also used augmented data as part of their test set without justification and I did not. As a consequence, my test set is much smaller. That said, my results for the convolutional model appear to be consistent with theirs.
 
 ## References 
