@@ -22,7 +22,7 @@ In addition, we included the baseline case where no resampling was applied, and 
 ## Classifiers
 3 different algorithms were considered: k-NN, Random Forest and 1-D CNN. 
 
-Detailed hyperparameter tuning for k-nn and random forest classifiers are lacking in this analysis, with stronger focus on quick comparison between affects of different oversampling methods in model performance. 
+Detailed hyperparameter tuning for k-nn and random forest classifiers are not performed in this analysis, with a stronger focus on quick comparison between affects of different oversampling methods in model performance. 
 
 For the 1-d Convolutional Neural Net, the original model was referred from https://www.kaggle.com/code/gregoiredc/arrhythmia-on-ecg-classification-using-cnn. 
 
@@ -36,18 +36,20 @@ The network consists of:
 We have included several metrics which could accurately reflect the efficacy against imbalanced classification problem, along with classic confusion matrix. First category of metric is computed on the individual class level, whereas the second category is computed over all classes to show overall performance. 
 
 Amongst several metrics that were initially considered, below are the metrics that we set to focus on:
-- Class Level: Recall and F-2 Measure
-- Overall Level: Weighted Accuracy, Geometric Mean of Recalls, Macro-averaged F-2 Measure
+- Class Level: Precision, Recall, F-1 score, F-2 score
+- Overall Level: Weighted Accuracy, Geometric Mean of Recalls, Macro-averaged F-Measures(1 and 2)
  
-Every oversampling method we tested has shown improvement against the baseline case(no resampling), and exhibited sufficient capacity to learn the training distribution. The error rates for all models were highest for the classes with the fewest examples, namely S-and F-. 
+Every oversampling method we tested has exhibited sufficient capacity to learn the training distribution. The error rates for all models were highest for the classes with the fewest examples, namely S-and F-. 
+### Result summary(1)
+<img width="970" alt="Screen Shot 2022-08-11 at 12 08 08 AM" src="https://user-images.githubusercontent.com/110798353/183939829-75ee8ca1-7526-4aab-a695-ae33f50a15d8.png">
 
-To evaluate each oversampling method across different classifiers, we used the average ranking where the results are shown as below. 
+To evaluate each oversampling method across different classifiers, we also introduced the average ranking where the results are shown as below. 
+### Result summary(2)
+<img width="387" alt="Screen Shot 2022-08-11 at 10 53 10 AM" src="https://user-images.githubusercontent.com/110798353/184051892-1e4d7fe9-8f34-41c0-a874-a30c7857d41b.png">
 
-<img width="675" alt="Screen Shot 2022-08-10 at 12 10 48 PM" src="https://user-images.githubusercontent.com/110798353/183801901-33ddd634-b094-4e2d-9014-a5b61ac08ccc.png">
+There was no single method that outperformed the rest in all metrics, yet we find SMOTETomek to perform consistently well across different metrics. ProWSyn showed good performance in metrics that weight more on recall, yet sacrificed the f-1 score in return. ADASYN and SMOTE were the second-best group all around, while BorderlineSMOTE did not show tangible benefit over random upsampling in our case.
 
-There was no single method that donimates the rest in all metrics, yet we find ProWSyn and SMOTETomek to perform consistently well across different metrics. ADASYN and SMOTE were the second-best group with no notable preference over one another to be confirmed, while BorderlineSMOTE did not show tangible benefit over random upsampling in our case.
-
-On class-level metrics, in most cases higher recall is accompanied by lower precision. However, for our classification problem, we believe the recall value carries more importance as for health issues it is deemed to be more costly to generate false negatives. Additionally, the trade-off turns out to be beneficial with regards to the value of combined-level metrics.
+In most cases higher recall is accompanied by lower precision. For our classification problem however, we believe the recall value may carry more importance as it is deemed to be more costly to generate false negatives for medical anomaly detections. Our oversampling methods led to improvement in combined metrics that favour recall, without notable degardation of macro f-1 score with the exception when k-nn classifier is used.  
 
 ## References 
 Learning from Imbalanced Data (Haibo He, Edwardo A.Garcia)
